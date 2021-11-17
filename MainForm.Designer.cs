@@ -48,6 +48,7 @@ namespace GameOfLife
             this.gridPictureBox.TabIndex = 0;
             this.gridPictureBox.TabStop = false;
             this.gridPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.GridPictureBox_Paint);
+            this.gridPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GridPictureBox_MouseDown);
             // 
             // generationTimer
             // 

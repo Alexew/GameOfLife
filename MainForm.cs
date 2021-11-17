@@ -14,24 +14,11 @@ namespace GameOfLife
     {
         const int width = 80;
         const int height = 50;
-        private bool[,] lifeGrid;
+        private bool[,] lifeGrid = new bool[width, height];
 
         public MainForm()
         {
             InitializeComponent();
-            InitializeLifeGrid();
-        }
-
-        private void InitializeLifeGrid()
-        {
-            lifeGrid = new bool[width, height];
-
-            // Glider
-            lifeGrid[2, 0] = true;
-            lifeGrid[0, 1] = true;
-            lifeGrid[2, 1] = true;
-            lifeGrid[1, 2] = true;
-            lifeGrid[2, 2] = true;
         }
 
         private void NextGeneration()
@@ -110,6 +97,13 @@ namespace GameOfLife
         private void GenerationSpeedTrackBar_Scroll(object sender, EventArgs e)
         {
             generationTimer.Interval = generationSpeedTrackBar.Value * 10;
+        }
+
+        private void GridPictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            lifeGrid[e.X / 10, e.Y / 10] = !lifeGrid[e.X / 10, e.Y / 10];
+
+            gridPictureBox.Refresh();
         }
     }
 }
