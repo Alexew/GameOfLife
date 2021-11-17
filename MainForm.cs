@@ -100,5 +100,16 @@ namespace GameOfLife
                 }
             }
         }
+
+        private void PlayButton_Click(object sender, EventArgs e)
+        {
+            generationTimer.Enabled = !generationTimer.Enabled;
+            playButton.Text = playButton.Text == "Play" ? "Pause" : "Play";
+        }
+
+        private void GenerationSpeedTrackBar_Scroll(object sender, EventArgs e)
+        {
+            generationTimer.Interval = generationSpeedTrackBar.Value * 10;
+        }
     }
 }
