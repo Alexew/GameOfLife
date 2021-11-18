@@ -14,63 +14,19 @@ namespace GameOfLife
     {
         const int width = 80;
         const int height = 50;
-        private bool[,] lifeGrid = new bool[width, height];
+
+        private readonly Grid lifeGrid;
 
         public MainForm()
         {
             InitializeComponent();
-        }
 
-        private void NextGeneration()
-        {
-            var bufferGrid = new bool[width, height];
-
-            Array.Copy(lifeGrid, bufferGrid, width * height);
-
-            for (var i = 0; i < width; i++)
-            {
-                for (var j = 0; j < height; j++)
-                {
-                    var neighborsNumber = 0;
-
-                    for (var x = i - 1; x < i + 2; x++)
-                    {
-                        for (var y = j - 1; y < j + 2; y++)
-                        {
-                            if (x == i && y == j)
-                                continue;
-
-                            var xNormal = x;
-                            if (xNormal < 0)
-                                xNormal += width;
-                            if (xNormal == width)
-                                xNormal = 0;
-
-                            var yNormal = y;
-                            if (yNormal < 0)
-                                yNormal += height;
-                            if (yNormal == height)
-                                yNormal = 0;
-
-                            if (lifeGrid[xNormal, yNormal])
-                                neighborsNumber++;
-                        }
-                    }
-
-                    if (neighborsNumber == 3)
-                        bufferGrid[i, j] = true;
-                    else if (neighborsNumber != 2)
-                        bufferGrid[i, j] = false;
-                }
-            }
-
-            lifeGrid = bufferGrid;
+            lifeGrid = new Grid(80, 50);
         }
 
         private void GenerationTimer_Tick(object sender, EventArgs e)
         {
-            NextGeneration();
-
+            lifeGrid.NextGeneration();
             gridPictureBox.Refresh();
         }
 
@@ -82,7 +38,7 @@ namespace GameOfLife
             {
                 for (var j = 0; j < height; j++)
                 {
-                    if (lifeGrid[i, j])
+                    if (lifeGrid.Cells[i, j].IsAlive)
                         e.Graphics.FillRectangle(brush, i * 10 + 1, j * 10 + 1, 8, 8);
                 }
             }
@@ -101,7 +57,7 @@ namespace GameOfLife
 
         private void GridPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            lifeGrid[e.X / 10, e.Y / 10] = !lifeGrid[e.X / 10, e.Y / 10];
+            lifeGrid.Cells[e.X / 10, e.Y / 10].Toggle();
 
             gridPictureBox.Refresh();
         }
