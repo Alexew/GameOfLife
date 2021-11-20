@@ -35,14 +35,23 @@ namespace GameOfLife
             this.playButton = new System.Windows.Forms.Button();
             this.generationSpeedTrackBar = new System.Windows.Forms.TrackBar();
             this.generationSpeedLabel = new System.Windows.Forms.Label();
+            this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.generationSpeedTrackBar)).BeginInit();
+            this.mainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // gridPictureBox
             // 
             this.gridPictureBox.BackColor = System.Drawing.Color.Black;
-            this.gridPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.gridPictureBox.Location = new System.Drawing.Point(0, 27);
             this.gridPictureBox.Name = "gridPictureBox";
             this.gridPictureBox.Size = new System.Drawing.Size(800, 500);
             this.gridPictureBox.TabIndex = 0;
@@ -56,7 +65,7 @@ namespace GameOfLife
             // 
             // playButton
             // 
-            this.playButton.Location = new System.Drawing.Point(10, 509);
+            this.playButton.Location = new System.Drawing.Point(10, 536);
             this.playButton.Name = "playButton";
             this.playButton.Size = new System.Drawing.Size(75, 23);
             this.playButton.TabIndex = 1;
@@ -67,7 +76,7 @@ namespace GameOfLife
             // generationSpeedTrackBar
             // 
             this.generationSpeedTrackBar.LargeChange = 3;
-            this.generationSpeedTrackBar.Location = new System.Drawing.Point(153, 509);
+            this.generationSpeedTrackBar.Location = new System.Drawing.Point(153, 536);
             this.generationSpeedTrackBar.Maximum = 100;
             this.generationSpeedTrackBar.Minimum = 1;
             this.generationSpeedTrackBar.Name = "generationSpeedTrackBar";
@@ -79,25 +88,93 @@ namespace GameOfLife
             // generationSpeedLabel
             // 
             this.generationSpeedLabel.AutoSize = true;
-            this.generationSpeedLabel.Location = new System.Drawing.Point(105, 513);
+            this.generationSpeedLabel.Location = new System.Drawing.Point(105, 540);
             this.generationSpeedLabel.Name = "generationSpeedLabel";
             this.generationSpeedLabel.Size = new System.Drawing.Size(42, 15);
             this.generationSpeedLabel.TabIndex = 4;
             this.generationSpeedLabel.Text = "Speed:";
             // 
+            // mainMenuStrip
+            // 
+            this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.mainMenuStrip.Name = "mainMenuStrip";
+            this.mainMenuStrip.Size = new System.Drawing.Size(800, 24);
+            this.mainMenuStrip.TabIndex = 5;
+            this.mainMenuStrip.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newGameToolStripMenuItem,
+            this.openToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.saveToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // newGameToolStripMenuItem
+            // 
+            this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newGameToolStripMenuItem.Text = "New Game";
+            this.newGameToolStripMenuItem.Click += new System.EventHandler(this.NewGameToolStripMenuItem_Click);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+S";
+            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.ShortcutKeyDisplayString = "Alt+F4";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 541);
+            this.ClientSize = new System.Drawing.Size(800, 568);
             this.Controls.Add(this.generationSpeedLabel);
             this.Controls.Add(this.generationSpeedTrackBar);
             this.Controls.Add(this.playButton);
             this.Controls.Add(this.gridPictureBox);
+            this.Controls.Add(this.mainMenuStrip);
+            this.MainMenuStrip = this.mainMenuStrip;
             this.Name = "MainForm";
             this.Text = "The Game of Life";
             ((System.ComponentModel.ISupportInitialize)(this.gridPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.generationSpeedTrackBar)).EndInit();
+            this.mainMenuStrip.ResumeLayout(false);
+            this.mainMenuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -110,6 +187,14 @@ namespace GameOfLife
         private System.Windows.Forms.Button playButton;
         private System.Windows.Forms.TrackBar generationSpeedTrackBar;
         private System.Windows.Forms.Label generationSpeedLabel;
+        private System.Windows.Forms.MenuStrip mainMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newGameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
     }
 }
 

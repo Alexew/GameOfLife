@@ -65,5 +65,26 @@ namespace GameOfLife
                 }
             }
         }
+
+        public string SaveData()
+        {
+            var data = string.Empty;
+
+            foreach (var cell in Cells)
+                data += cell.IsAlive ? "1" : "0";
+
+            return data;
+        }
+
+        public void LoadData(string data)
+        {
+            for (var i = 0; i < Width; i++)
+            {
+                for (var j = 0; j < Height; j++)
+                {
+                    Cells[i, j].IsAlive = data[i * Height + j] == '1';
+                }
+            }
+        }
     }
 }
