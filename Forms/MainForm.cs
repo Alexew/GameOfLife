@@ -1,15 +1,13 @@
-﻿using System;
+﻿using GameOfLife.Models;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace GameOfLife
+namespace GameOfLife.Forms
 {
     public partial class MainForm : Form
     {
-        const int width = 80;
-        const int height = 50;
-
         private Grid lifeGrid;
 
         public MainForm()
@@ -18,9 +16,12 @@ namespace GameOfLife
             NewGame();
         }
 
-        private void NewGame()
+        private void NewGame(int width = 80, int height = 50)
         {
             lifeGrid = new Grid(width, height);
+
+            gridPictureBox.Width = width * 10;
+            gridPictureBox.Height = height * 10;
         }
 
         private void Play()
@@ -45,9 +46,9 @@ namespace GameOfLife
         {
             using var brush = new SolidBrush(Color.White);
 
-            for (var i = 0; i < width; i++)
+            for (var i = 0; i < lifeGrid.Width; i++)
             {
-                for (var j = 0; j < height; j++)
+                for (var j = 0; j < lifeGrid.Height; j++)
                 {
                     if (lifeGrid.Cells[i, j].IsAlive)
                         e.Graphics.FillRectangle(brush, i * 10 + 1, j * 10 + 1, 8, 8);
@@ -78,16 +79,27 @@ namespace GameOfLife
 
         private void NewGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Pause();
-            NewGame();
+            var isPlay = generationTimer.Enabled;
+            if (isPlay)
+                Pause();
 
-            gridPictureBox.Refresh();
+            var newGameDialog = new NewGameForm();
+            if (newGameDialog.ShowDialog() == DialogResult.OK)
+            {
+                NewGame(newGameDialog.GridWidth, newGameDialog.GridHeight);
+                
+                gridPictureBox.Refresh();
+            }
+            else
+            {
+                if (isPlay)
+                    Play();
+            }
         }
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var isPlay = generationTimer.Enabled;
-
             if (isPlay)
                 Pause();
 
@@ -114,7 +126,6 @@ namespace GameOfLife
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var isPlay = generationTimer.Enabled;
-
             if (isPlay)
                 Pause();
 

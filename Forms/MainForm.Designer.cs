@@ -1,5 +1,4 @@
-﻿
-namespace GameOfLife
+﻿namespace GameOfLife.Forms
 {
     partial class MainForm
     {
