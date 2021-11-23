@@ -66,6 +66,7 @@ namespace GameOfLife
         private void GenerationSpeedTrackBar_Scroll(object sender, EventArgs e)
         {
             generationTimer.Interval = generationSpeedTrackBar.Value * 10;
+            generationSpeedLabel.Text = generationTimer.Interval + " ms";
         }
 
         private void GridPictureBox_MouseDown(object sender, MouseEventArgs e)
